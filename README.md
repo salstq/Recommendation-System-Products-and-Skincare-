@@ -1,15 +1,19 @@
 # Laporan Proyek Machine Learning - Salsa Tashfiyatul Qolbi
 
-## Domain Proyek
-....
+## Project Overview
+Pada era ini, pengguna dihadapkan pada ribuan pilihan produk dengan berbagai manfaat, kandungan, dan klaim. Industri kecantikan dan perawatan kulit berlomba-lomba membuat produk terbaru dan memiliki banyak manfaat serta klaim. Hal ini dapat menimbulkan kebingungan dalam memilih produk yang paling sesuai dengan kebutuhan dan preferensi masing-masing individu. Oleh karena itu, dibutuhkan sebuah sistem yang mampu membantu pengguna menemukan produk yang relevan secara efisien dan personal. Salah satu solusi yang dapat diterapkan adalah sistem rekomendasi berbasis konten (content-based recommendation system), yang menyarankan produk berdasarkan kemiripan informasi produk lain yang telah diketahui.
+
+Proyek ini bertujuan untuk membangun sistem rekomendasi produk makeup dan skincare menggunakan pendekatan content-based filtering. Sistem ini mengekstrak fitur penting dari produk seperti deskripsi, bahan (ingredients), kategori, dan jenis produk, lalu menghitung kemiripan antar produk menggunakan teknik TF-IDF vectorization dan cosine similarity. Dengan pendekatan ini, sistem dapat memberikan rekomendasi top-10 produk serupa kepada pengguna, tanpa riwayat interaksi sebelumnya.
 
 ## Business Understanding
 
 ### Problem Statements
-* Bagaimana cara merekomendasikan produk yang relevan kepada pengguna berdasarkan produk yang mereka cari?
+* Bagaimana cara merekomendasikan produk skincare yang mirip berdasarkan produk yang sedang dilihat pengguna di platform e-commerce Sephora?
+* Bagaimana sistem rekomendasi dapat membantu pengguna menemukan produk yang relevan meskipun tanpa riwayat interaksi pengguna sebelumnya?
 
 ### Goals
-* Membangun sistem rekomendasi untuk produk Sephora dan menyediakan rekomendasi top-N produk serupa berdasarkan produk dan kategori produk.
+* Membangun sistem rekomendasi berbasis konten (Content-Based Filtering) yang memberikan top-N rekomendasi produk skincare yang mirip, berdasarkan konten produk seperti deskripsi, bahan, dan kategori.
+* Menyediakan antarmuka pengguna sederhana yang dapat menampilkan hasil rekomendasi dengan jelas dan dapat diinterpretasikan.
 
 ### Solution Statements
 * Sistem akan mengekstrak fitur penting dari setiap produk, seperti bahan (ingredients), deskripsi produk, kategori, dan jenis produk.
@@ -138,13 +142,17 @@ Tidak terdapat data yang terduplikasi. Sama hal nya dengan missing value, cek du
 
 ### EDA - Univariate Analysis
 Berikut adalah persebaran data atau distribusi data dari fitur numerik.
-... 
+
+[num_distribution](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Numerikal_distribution.png)
 
 Berikut adalah persebaran data atau distribusi data dari fitur kategorikal.
-...
+
+[cate_distribution](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Categorikal_distribution.png)
 
 ### Correlation Matrix
-...
+
+[corr](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Numerikal_distribution.png)
+
 Terlihat pada metrik korelasi bahwa setiap fitur numerik tidak memiliki korelasi satu sama lain, kecuali fitur reviews dan loves_count. Kedua fitur tersebut berkorelasi positif, yang artinya jika fitur reviews meningkat maka fitur loves_count juga ikut meningkat.
 
 ## Data Preparation
@@ -208,7 +216,7 @@ cosine_similarity() digunakan untuk menghitung kesamaan antar item berdasarkan r
 ### Pengujian Model
 
 Dilakukan 2x pengujian sebagai berikut:
-- `recommend('Cleanser', category='skincare')`
+1. `recommend('Cleanser', category='skincare')`
 
 Produk yang cocok dengan pencarianmu:<br>
 - GENIUS Ultimate Anti-Aging Melting Cleanser
@@ -226,7 +234,7 @@ Rekomendasi produk untukmu:
  |	558 |		The POREfessional Get Unblocked Makeup-Removing Cleansing Oil	 |	Benefit Cosmetics	 |	Skincare Cleansers Face Wash & Cleansers |		['Caprylic/Capric Triglyceride, Simmondsia Chinensis (Jojoba) Seed Oil, PEG-40 Sorbitan Peroleate, Persea Gratissima (Avocado) Oil, Vitis Vinifera (Grape) Seed Oil, 1,2-Hexanediol, Caprylyl Glycol... |		['Good for: Dullness/Uneven Texture', 'Good for: Pores'] |	
  |	4159  |		Ultra Facial Cream Refill Bundle	 |	Kiehl's Since 1851	 |	Skincare Value & Gift Sets Unknown	 |	['Aqua / Water Glycerin Dimethicone Squalane Bis-Peg-18 Methyl Ether Dimethyl Silane Sucrose Stearate Stearyl Alcohol Peg-8 Stearate Myristyl Myristate Prunus Armeniaca Kernel Oil / Apricot Kernel...	 |	['Clean at Sephora', 'Good for: Dryness', 'Without Parabens'] |	
 
-- `recommend('Mascara', category='makeup')`
+2. `recommend('Mascara', category='makeup')`
   
 Produk yang cocok dengan pencarianmu:<br>
 - Lash-Amplifying Volumizing & Lengthening Mascara
@@ -254,7 +262,7 @@ Selain menampilkan rekomendasi, sistem juga memberikan produk yang cocok atau se
 ### Precision
 Untuk Content-Based Filtering digunakan metrik evaluasi precision untuk melihat seberapa baik sistem rekomendasi menggunakan Cosine Similarity. Precision adalah metrik evaluasi yang akan mengukur seberapa banyak dari hasil yang ditampilkan oleh sistem benar-benar relevan. Precision memberikan gambaran seberapa banyak dari prediksi yang dikategorikan positif benar-benar merupakan kasus positif yang sebenarnya.
 
-![Screenshot 2025-05-29 010903.png]()
+![Screenshot 2025-05-29 010903.png](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Precision.png)
 
 Dimana:
 - TP (True Positive), jumlah kejadian positif yang diprediksi dengan benar.
@@ -262,7 +270,7 @@ Dimana:
 
 Karena dalam pengujian dilakukan dua kali, maka untuk menghitung precision akan menggunakan average precision. Average precision dapat memberikan informasi terkait rata-rata performa sistem rekomendasi.
 
-![image.png]()
+![image.png](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Average_Precision.png)
 
 Dimana:
 - n : jumlah pengujian
@@ -276,3 +284,19 @@ recommend('Waterproof', category='makeup') menghasilkan 10 rekomendasi, dimana a
 
 Rata-rata precision:
 Pada pengujian pertama didapat hasil 0.7 dan pada pengujian kedua didapat hasil 0.9, maka rata-rata precision adalah sebesar **0.8**.
+
+## Dampak Model terhadap Business Understanding
+
+### Apakah Model Menjawab Problem Statements?
+* **Ya**, model menggunakan pendekatan content-based filtering yang memanfaatkan TF-IDF vectorization dan cosine similarity untuk merekomendasikan produk serupa berdasarkan deskripsi, bahan, dan kategori produk. Ini sesuai dengan problem statements yang ingin merekomendasikan produk tanpa bergantung pada riwayat interaksi pengguna.
+
+### Apakah Model Berhasil Mencapai Goals?
+* **Ya**, model berhasil memberikan rekomendasi Top 10 produk yang relevan dan serupa berdasarkan konten produk. Proses preprocessing, ekstraksi fitur, dan perhitungan kemiripan dilakukan dengan benar, dan hasil rekomendasi ditampilkan secara jelas, sesuai dengan tujuan yang ditetapkan.
+
+### Apakah Solusi yang Direncanakan Berdampak?
+* **Ya**, solusi yang direncanakan terbukti berdampak karena seluruh komponen yang dirancang berhasil diimplementasikan dan memberikan hasil yang sesuai tujuan. Sistem berhasil mengekstrak fitur penting dari produk seperti bahan, deskripsi, kategori, dan jenis produk, kemudian mengukur kemiripan antar produk menggunakan TF-IDF vectorization dan cosine similarity. Selain itu, karena sistem tidak memerlukan data pengguna lain, tetapi tetap mampu memberikan rekomendasi yang relevan untuk pengguna baru. Hal ini membuat sistem lebih fleksibel, scalable, dan efektif untuk diterapkan dalam lingkungan e-commerce.
+
+## Kesimpulan
+Sistem rekomendasi berbasis konten yang dibangun dalam proyek ini berhasil memberikan rekomendasi produk skincare yang relevan berdasarkan kemiripan produk. Dengan menggunakan teknik TF-IDF vectorization dan cosine similarity, sistem mampu menghitung tingkat kemiripan antar produk dan menghasilkan rekomendasi top-N produk serupa. Berdasarkan evaluasi, sistem rekomendasi produk & skincare dengan pendekatan Content-Based Filtering berhasil mencapai rata-rata precision 0.8, memberikan rekomendasi yang relevan berdasarkan kesamaan produk.
+
+Sehingga dapat disimpulkan, bahwa pendekatan ini dapat dikatakan berhasil memenuhi tujuan dari dibuatnya projek ini dimana model dapat memprediksi produk berdasarkan deskripsi, bahan, dan kategori menggunakan content-based filtering.
