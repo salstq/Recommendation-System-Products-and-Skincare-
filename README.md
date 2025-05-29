@@ -151,7 +151,7 @@ Berikut adalah persebaran data atau distribusi data dari fitur kategorikal.
 
 ### Correlation Matrix
 
-![corr](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Numerikal_distribution.png)
+![corr](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Corelation.png)
 
 Terlihat pada metrik korelasi bahwa setiap fitur numerik tidak memiliki korelasi satu sama lain, kecuali fitur reviews dan loves_count. Kedua fitur tersebut berkorelasi positif, yang artinya jika fitur reviews meningkat maka fitur loves_count juga ikut meningkat.
 
