@@ -101,7 +101,30 @@ Output di atas menunjukkan bahwa dataset memiliki 8494 data dan 27 kolom.
 - Terdapat 7 tipe data float64
 - Terdapat Missing Value
 
-### Check Missing Value dan Duolikasi
+### EDA - Univariate Analysis
+Berikut adalah persebaran data atau distribusi data dari fitur numerik.
+
+![num_distribution](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Numerikal_distribution.png)
+
+Berikut adalah persebaran data atau distribusi data dari fitur kategorikal.
+
+![cate_distribution](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Categorikal_distribution.png)
+
+### Correlation Matrix
+
+![corr](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Corelation.png)
+
+Terlihat pada metrik korelasi bahwa setiap fitur numerik tidak memiliki korelasi satu sama lain, kecuali fitur reviews dan loves_count. Kedua fitur tersebut berkorelasi positif, yang artinya jika fitur reviews meningkat maka fitur loves_count juga ikut meningkat.
+
+## Data Preparation
+Teknik yang akan dilakukan:
+- Cek Missing Value & Duplikasi
+- Fitur selection : menghapus beberapa fitur yang tidak relevan
+- Fitur Combine : menggabungkan beberapa fitur menjadi satu fitur
+- Text Preprocessing : membersihkan data dari simbol, tanda baca, atau kata yang tidak terlalu bermakna
+- TF-IDF Vectorization
+
+### Check Missing Value dan Duplikasi
 
 | Column   | Duplicate Count | Missing Values Count |
 |----------|-----------------|----------------------|
@@ -140,27 +163,6 @@ Walaupun penanganan missing value termasuk tahap data preparation, namun tetap d
 
 Tidak terdapat data yang terduplikasi. Sama hal nya dengan missing value, cek duplikasi data dilakukan sebelum EDA.
 
-### EDA - Univariate Analysis
-Berikut adalah persebaran data atau distribusi data dari fitur numerik.
-
-![num_distribution](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Numerikal_distribution.png)
-
-Berikut adalah persebaran data atau distribusi data dari fitur kategorikal.
-
-![cate_distribution](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Categorikal_distribution.png)
-
-### Correlation Matrix
-
-![corr](https://github.com/salstq/Recommendation-System-Products-and-Skincare-/blob/main/Gambar/Corelation.png)
-
-Terlihat pada metrik korelasi bahwa setiap fitur numerik tidak memiliki korelasi satu sama lain, kecuali fitur reviews dan loves_count. Kedua fitur tersebut berkorelasi positif, yang artinya jika fitur reviews meningkat maka fitur loves_count juga ikut meningkat.
-
-## Data Preparation
-Teknik yang akan dilakukan:
-- Fitur selection : menghapus beberapa fitur yang tidak relevan
-- Fitur Combine : menggabungkan beberapa fitur menjadi satu fitur
-- Text Preprocessing : membersihkan data dari simbol, tanda baca, atau kata yang tidak terlalu bermakna
-
 ### Fitur Selection
 Dilakukan untuk memilih fitur-fitur yang paling relevan dengan sistem rekomendasi, tujuannya untuk meningkatkan akurasi dan generalisasi model. Kenapa banyak fitur yang dihapus? Karena sistem rekomendasi ini sangat sederhana dan berbasis teks. Fitur yang dipilih pun akan cocok dengan pendekatan Content-Based Filtering dengan menggunakan TF-IDF dan Cosine Similarity.
 
@@ -169,12 +171,6 @@ Dilakukan untuk membuat fitur baru dari kombinasi fitur lama untuk memperkuat si
 
 ### Text Preprocessing
 Tujuan dari tahap ini adalah untuk menyamakan bentuk huruf, menghapus simbol atau angka, menghapus kata yang tidak bermakna, memecah kata, dan mengembalikannya menjadi teks bersih.
-
-## Data Modelling
-Hal yang dilakukan:
-- TF-IDF vektorizer
-- Cosine Similarity
-- Pengujian Model
 
 ### TF-IDF vektorizer
 TF-IDF adalah metode konversi teks menjadi angka yang mencerminkan pentingnya suatu kata dalam sebuah dokumen relatif terhadap seluruh korpus
@@ -186,6 +182,11 @@ Kekurangan:
 - Tidak memahami konteks
 - Tidak menangkap urutan kata
 - Tidak memperhitungkan sinonim
+
+## Data Modelling
+Hal yang dilakukan:
+- Cosine Similarity
+- Pengujian Model
 
 ### Cosine Similarity
 Cosine similarity adalah ukuran kesamaan antara dua vektor berdasarkan sudut kosinus di antara mereka, bukan nilai absolut atau jarak euclidean. Fungsi utamanya untuk mengukur kemiripan dokumen teks, terutama yang direpresentasikan dalam bentuk TF-IDF.
